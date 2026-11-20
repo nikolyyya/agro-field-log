@@ -1,2 +1,65 @@
-# agro-field-log
-Учёт полевых работ и затрат в сельскохозяйственном хозяйстве
+# Журнал полевых работ и затрат
+
+Веб-приложение для учёта полевых работ в сельскохозяйственном хозяйстве. Цель проекта — дать агроному возможность вести журнал работ, а руководителю — видеть общие затраты и затраты на гектар по каждому полю за сезон.
+
+Разработчик — Гринь Вероника. Рабочая ветка — `veronika`.
+
+## Быстрый запуск бэкенда
+
+Понадобятся Git и Python 3.12. Бэкенд использует Django, Django REST Framework и SQLite.
+
+```bash
+git clone --branch veronika https://github.com/nikolyyya/agro-field-log.git
+cd agro-field-log/backend
+```
+
+Создай виртуальное окружение и скопируй шаблон настроек. Для Linux и WSL выполни:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+cp .env.example .env
+```
+
+Для Windows PowerShell выполни:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+Copy-Item .env.example .env
+```
+
+Сгенерируй ключ и вставь полученную строку после `DJANGO_SECRET_KEY=` в локальном файле `backend/.env`. В командах ниже для PowerShell используй `.\.venv\Scripts\python.exe` вместо `python`.
+
+```bash
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+
+После сохранения `.env` проверь настройки, создай таблицы и запусти сервер.
+
+```bash
+python manage.py check
+python manage.py migrate
+python manage.py runserver
+```
+
+Проверка запуска — `GET http://127.0.0.1:8000/api/health/` возвращает `{"status":"ok"}`. Для доступа к `/admin/` создай локального администратора командой `python manage.py createsuperuser`.
+
+| Переменная | Назначение |
+| --- | --- |
+| `DJANGO_SECRET_KEY` | Секретный ключ Django. Задаётся при локальной настройке |
+| `DJANGO_DEBUG` | `true` включает режим отладки для локальной разработки |
+| `DJANGO_ALLOWED_HOSTS` | Имена хостов через запятую |
+
+## Этапы бэкенда
+
+1. Основа Django-проекта, локальная настройка и проверка запуска API.
+2. Модели и миграции для полей, культур, сезонов, посевов и записей о работах. Справочники в Django Admin.
+3. Аутентификация и права. Агроном ведёт журнал, руководитель просматривает данные и отчёты.
+4. API журнала полевых работ, фильтрация по полю и сезону, серверная валидация.
+5. Отчёт по затратам, демонстрационные данные, проверка прав доступа и документация API для React.
+
+## Использование ИИ
+
+Codex подготовил начальную конфигурацию Django, маршрут проверки запуска и черновик инструкции. Команды для проверки конфигурации и маршрута приведены в разделе запуска.
