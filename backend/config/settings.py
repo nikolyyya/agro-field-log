@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "field_log.apps.FieldLogConfig",
 ]
 
 MIDDLEWARE = [
