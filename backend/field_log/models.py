@@ -97,6 +97,7 @@ class WorkEntry(models.Model):
         ordering = ("-work_date", "-pk")
         verbose_name = "запись о работе"
         verbose_name_plural = "записи о работах"
+        permissions = [("view_cost_report", "Может просматривать отчёт о затратах")]
         constraints = [
             models.CheckConstraint(condition=models.Q(cost__gte=0), name="work_cost_nonnegative"),
         ]
