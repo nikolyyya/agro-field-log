@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -18,4 +18,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/health/", health, name="health"),
     path("api/auth/token/", LoginView.as_view(), name="auth-token"),
+    path("api/", include("field_log.urls")),
 ]
