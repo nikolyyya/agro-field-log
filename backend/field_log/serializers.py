@@ -52,3 +52,13 @@ class WorkEntrySerializer(serializers.ModelSerializer):
 class WorkEntryFiltersSerializer(serializers.Serializer):
     field = serializers.IntegerField(min_value=1, max_value=SQLITE_MAX_ID, required=False)
     season = serializers.IntegerField(min_value=1, max_value=SQLITE_MAX_ID, required=False)
+
+
+class CostReportSerializer(serializers.Serializer):
+    field = serializers.IntegerField()
+    field_name = serializers.CharField()
+    season = serializers.IntegerField()
+    season_name = serializers.CharField()
+    area_ha = serializers.CharField()
+    total_cost = serializers.CharField()
+    cost_per_ha = serializers.CharField()
