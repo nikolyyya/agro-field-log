@@ -38,3 +38,35 @@ export const getSeasons = async () => {
     throw error.response?.data || { detail: 'Ошибка загрузки сезонов' };
   }
 };
+export const createWorkEntry = async (data) => {
+  try {
+    const response = await api.post('work-entries/', data);
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || { detail: 'Ошибка создания записи' };
+  }
+};
+export const updateWorkEntry = async (id, data) => {
+  try {
+    const response = await api.patch(`work-entries/${id}/`, data);
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || { detail: 'Ошибка обновления записи' };
+  }
+};
+export const deleteWorkEntry = async (id) => {
+  try {
+    await api.delete(`work-entries/${id}/`);
+    return true; 
+  } catch (error) {
+    throw error.response?.data || { detail: 'Ошибка удаления записи' };
+  }
+};
+export const getPlantings = async () => {
+  try {
+    const response = await api.get('plantings/');
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || { detail: 'Ошибка загрузки посевов' };
+  }
+};
